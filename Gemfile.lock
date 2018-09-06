@@ -112,7 +112,7 @@ DEPENDENCIES
   capybara
   database_cleaner!
   pry
-  rack-test (= 1.1.0)
+  rack-test
   rake
   require_all
   rspec
