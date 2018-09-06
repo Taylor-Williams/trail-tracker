@@ -1,4 +1,4 @@
-class CreateUserTrails < ActiveRecord::Migration[5.2]
+class CreateUserTrails < ActiveRecord::Migration
   def change
     create_table :user_trails do |t|
       t.integer :user_id

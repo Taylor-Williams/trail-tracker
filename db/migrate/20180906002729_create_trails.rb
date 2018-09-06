@@ -1,4 +1,4 @@
-class CreateTrails < ActiveRecord::Migration[5.2]
+class CreateTrails < ActiveRecord::Migration
   def change
     create_table :trails do |t|
       t.integer :length
