@@ -5,6 +5,20 @@
     <title>Trail Tracker</title>
   </head>
   <body>
+    <nav>
+      <div class="navbar">
+        <a href="/trails">All Trails</a>
+        <a href="/states">All States</a>
+      </div>
+      <div class="sign_log_in">
+        <% if logged_in?%>
+          <a href="/users/<%=current_user.slug%>">your profile</a>
+        <% else %>
+          <a href="/login">log in</a>
+          <a href="/signup">sign up</a>
+        <% end %>
+      </div>
+    </nav>
     <%= yield %>
   </body>
 </html>
