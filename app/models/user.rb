@@ -10,7 +10,7 @@ class User < ActiveRecord::Base
 
   before_save do
     self.slug = self.username.gsub(/[^a-zA-Z0-9]+/, "-").downcase
-    self.slug.slice![-2] if self.slug =~ /-\z/
+    self.slug.slice![-1] if self.slug =~ /-\z/
     validates :slug, uniqueness: true
   end
 end

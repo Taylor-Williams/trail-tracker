@@ -1,0 +1,6 @@
+<h1>view all the sweet trails we have!</h1>
+<%@trails.each do |trail|%>
+<p><a href="/trails/<%=trail.slug%>"><%=trail.name%></a></p>
+<% end %>
+<br>
+<p><a href="/trails/new">make a new trail!</a></p>

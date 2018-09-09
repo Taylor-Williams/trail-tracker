@@ -1,6 +1,7 @@
 class TrailsController < ApplicationController
 
   get '/trails' do
+    @trails = Trail.all
     erb :"trails/index"
   end
 
