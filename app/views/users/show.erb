@@ -1,11 +1,11 @@
 <h1>Hiker friend <%=@user.username%>!</h1>
 <br>
-<% if @user.trails.empty? %>
+<% if @user.trails? %>
   <p><%="this hiker has not done any trails"%> </p>
 <% else %>
   <h3>trails this hiker has done:</h3>
-  <%=@user.trails.each do |trail|%>
-  <p><a href="/trails/<%=trail.slug%>"></a></p>
+  <% @user.trails.each do |trail| %>
+  <p><a href="/trails/<%=trail.slug%>"><%=trail.name%></a></p>
   <br>
   <h3>states this hiker has been to based on trails:</h3>
   <% @user.states.each do |state|%>

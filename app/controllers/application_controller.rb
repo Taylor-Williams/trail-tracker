@@ -29,6 +29,7 @@ class ApplicationController < Sinatra::Base
   end
 
   post '/signup' do
+    binding.pry
     @user = User.create(username: params[:username], password: params[:password], email: params[:email], bio: params[:bio])
     if !@user.valid?
       @errors = @user.errors.messages

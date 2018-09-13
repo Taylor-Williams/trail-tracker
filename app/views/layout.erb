@@ -9,10 +9,9 @@
       <div class="navbar">
         <a href="/trails">All Trails</a>
         <a href="/states">All States</a>
-      </div>
-      <div class="sign_log_in">
         <% if logged_in?%>
           <a href="/users/<%=current_user.slug%>">your profile</a>
+          <p><a href="/logout">logout</a></p>
         <% else %>
           <a href="/login">log in</a>
           <a href="/signup">sign up</a>
