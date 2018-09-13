@@ -1,0 +1,4 @@
+<h3>clicking any state will give you the trails registered in that state from our database</h3>
+<% @states.each do |state| %>
+  <p><a href="/states/<%=state.code%>"><%=state.name%></a></p>
+<% end %>
