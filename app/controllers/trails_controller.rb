@@ -9,8 +9,9 @@ class TrailsController < ApplicationController
     @trail = Trail.new(name: params[:name])
     trail_attrs = %i(length difficulty start_alt end_alt)
     trail_attrs.each do |attribute|
+      binding.pry
       if !params[attribute].empty?
-        @trail.send(attribute, params[attribute])
+        @trail.send("#{attribute}=", params[attribute])
       end
     end
     @trail.save

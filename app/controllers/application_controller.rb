@@ -29,7 +29,6 @@ class ApplicationController < Sinatra::Base
   end
 
   post '/signup' do
-    binding.pry
     @user = User.create(username: params[:username], password: params[:password], email: params[:email], bio: params[:bio])
     if !@user.valid?
       @errors = @user.errors.messages
@@ -44,7 +43,7 @@ class ApplicationController < Sinatra::Base
       user = User.find_by(username: params[:username])
       if user && user.authenticate(params[:password])
         session[:user_id] = user.id
-        redirect "/users/#{@user.slug}"
+        redirect "/users/#{user.slug}"
       else
         redirect '/login'
       end
