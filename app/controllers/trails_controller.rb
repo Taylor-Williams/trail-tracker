@@ -9,7 +9,6 @@ class TrailsController < ApplicationController
     @trail = Trail.new(name: params[:name])
     trail_attrs = %i(length difficulty start_alt end_alt)
     trail_attrs.each do |attribute|
-      binding.pry
       if !params[attribute].empty?
         @trail.send("#{attribute}=", params[attribute])
       end
@@ -19,6 +18,9 @@ class TrailsController < ApplicationController
       @errors = @trail.errors.messages
       erb :errors
     else
+      if params[:user_id]
+        @trail.user_trails.create(user_id: params[:user_id])
+      end
       redirect "/trails/#{@trail.slug}"
     end
   end
