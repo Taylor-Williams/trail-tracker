@@ -9,6 +9,12 @@ class UsersController < ApplicationController
     end
   end
 
+  post '/users/:slug/edit' do
+    @user = User.find_by(slug: params[:slug])
+    @user.update(bio: params[:bio])
+    redirect "/users/#{@user.slug}"
+  end
+
   post '/users/:user_id/:trail_id' do
     @user = User.find(params[:user_id])
     trail = Trail.find(params[:trail_id])

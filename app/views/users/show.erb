@@ -1,7 +1,19 @@
 <h1>Hiker friend <%=@user.username%>!</h1>
 <br>
 <% if logged_in? && current_user.id == @user.id %>
-  Welcome to your home page! to add trails go to any <a href="/trails">trails</a> page and click the button for "i have hiked this trail"
+  <p>Welcome to your home page! to add trails go to any <a href="/trails">trails</a> page and click the button for "i have hiked this trail"</p>
+  <form class="edit_bio" action="/users/<%=@user.slug%>/edit" method="post">
+    <label for="bio">would you like to edit your current bio(250 characters or less)?</label>
+    <textarea name="bio" id="bio" rows="5" cols="50" maxlength="250"><%=@user.bio%></textarea>
+    <input type="submit" value="edit bio">
+  </form>
+  <br>
+<% else %>
+  <% if @user.bio %>
+    <p>here is <%=@user.username%>'s bio:</p>
+    <p><%=@user.bio%></p>
+    <br>
+  <% end %>
 <% end %>
 <% if @user.trails.empty? %>
   <p><%="this hiker has not done any trails"%> </p>
