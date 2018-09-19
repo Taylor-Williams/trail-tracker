@@ -6,8 +6,8 @@ class TrailsController < ApplicationController
   end
 
   post '/trails' do
-    @trail = Trail.new(name: params[:name])
-    trail_attrs = %i(length difficulty start_alt end_alt)
+    @trail = Trail.new
+    trail_attrs = %i(name length difficulty start_alt end_alt)
     trail_attrs.each do |attribute|
       if !params[attribute].empty?
         @trail.send("#{attribute}=", params[attribute])
@@ -37,6 +37,29 @@ class TrailsController < ApplicationController
       redirect '/trails'
     end
   end
+
+  post '/trails/:slug/edit' do
+    @trail = Trail.find_by(slug: params[:slug])
+    trail_attrs = %i(name length difficulty start_alt end_alt)
+    trail_attrs.each do |attribute|
+      if !params[attribute].empty?
+        @trail.send("#{attribute}=", params[attribute])
+      end
+    end
+    @trail.save
+    if !@trail.valid?
+      @errors = @trail.errors.messages
+      erb :errors
+    else
+      if params[:user_id] && !@trail.user_ids.include?(:user_id)
+        @trail.user_trails.create(user_id: params[:user_id])
+      elsif !params[:user_id] && @trail.user_ids.include?(current_user.id)
+        UserTrail.find_by(trail_id: @trail.id, user_id: current_user.id).destroy
+      end
+      redirect "/trails/#{@trail.slug}"
+    end
+  end
+
 
 
 end

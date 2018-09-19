@@ -5,3 +5,21 @@
 <p>starting altitude: <%=@trail.start_alt%> ft</p>
 <p>ending altitude: <%=@trail.end_alt%> ft</p>
 <p>state: <%=@trail.length%></p>
+<br>
+<% if logged_in? %>
+<p>Edit this trail:</p>
+<form class="edit_trail" action="/trails/<%=@trail.slug%>/edit" method="post">
+  <label for="name">trail name:</label>
+  <input type="text" name="name" id="name">
+  <label for="length">length of trail in miles:</label>
+  <input type="text" name="length" id="length">
+  <label for="difficulty">difficulty (scale from 0-10):</label>
+  <input type="text" name="difficulty" id="difficulty">
+  <label for="start_alt">starting altitude in feet:</label>
+  <input type="text" name="start_alt" id="start_alt">
+  <label for="end_alt">ending altitude in feet:</label>
+  <input type="text" name="end_alt" id="end_alt">
+  <input type="checkbox" name="user_id" value="<%=current_user.id%>" <%="checked" if current_user.trail_ids.include?(@trail.id)%>>I have hiked this trail
+  <input type="submit" value="edit trail">
+</form>
+<% end %>
