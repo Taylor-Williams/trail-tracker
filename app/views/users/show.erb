@@ -25,6 +25,6 @@
   <br>
   <h3>states this hiker has been to based on trails:</h3>
   <% @user.states.each do |state|%>
-  <p><%=state.name%> (<%=state.code%>)</p>
+  <p><a href="/states/<%=state.code%>"><%=state.name%></a> (<%=state.code%>)</p>
   <% end %>
 <% end %>

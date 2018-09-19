@@ -5,7 +5,7 @@
 <p>starting altitude: <%=@trail.start_alt%> ft</p>
 <p>ending altitude: <%=@trail.end_alt%> ft</p>
 <% if @trail.state %>
-<p>state: <%=@trail.state.name%></p>
+<p>state: <a href="/states/<%=@trail.state.code%>"><%=@trail.state.name%></a></p>
 <% end %>
 <br>
 <% if logged_in? %>
