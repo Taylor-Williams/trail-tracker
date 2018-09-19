@@ -3,7 +3,7 @@
 <% else %>
   <h3>here are all of our trails in <%=@state.name%>:</h3>
   <% @state.trails.each do |trail|%>
-    <p><a href="trails/<%=trail.slug%>">trail.name</a></p>
+    <p><a href="trails/<%=trail.slug%>"><%=trail.name%></a></p>
   <% end %>
 <% end %>
 <br>
