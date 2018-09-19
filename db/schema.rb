@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180906003709) do
+ActiveRecord::Schema.define(version: 20180919015052) do
 
   create_table "states", force: :cascade do |t|
     t.string "name"
@@ -26,6 +26,7 @@ ActiveRecord::Schema.define(version: 20180906003709) do
     t.float   "start_alt"
     t.float   "end_alt"
     t.integer "state_id"
+    t.integer "creator_id"
   end
 
   create_table "user_trails", force: :cascade do |t|

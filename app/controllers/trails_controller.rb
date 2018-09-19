@@ -23,6 +23,7 @@ class TrailsController < ApplicationController
           @trail.state = state
         end
     end
+    @trail.creator_id = current_user.id
     @trail.save
     if !@trail.valid?
       @errors = @trail.errors.messages
@@ -80,6 +81,8 @@ class TrailsController < ApplicationController
     end
   end
 
-
-
+  post '/trails/:slug/destroy' do
+    Trail.find_by(slug: params[:slug]).destroy
+    redirect '/trails'
+  end
 end

@@ -4,9 +4,20 @@
 <p>difficulty: <%=@trail.difficulty%></p>
 <p>starting altitude: <%=@trail.start_alt%> ft</p>
 <p>ending altitude: <%=@trail.end_alt%> ft</p>
+<% if @trail.state %>
 <p>state: <%=@trail.state.name%></p>
+<% end %>
 <br>
 <% if logged_in? %>
+<form class="hiked_trail" action="/users/<%=current_user.id%>/<%=@trail.id%>" method="post">
+  <%if !current_user.trail_ids.include?(@trail.id)%>
+    <input type="submit" value="i have hiked this trail">
+  <% else %>
+    <input type="submit" value="unhike trail">
+  <% end %>
+</form>
+<% end %>
+<% if logged_in? && @trail.creator_id == current_user.id %>
 <p>Edit this trail:</p>
 <form class="edit_trail" action="/trails/<%=@trail.slug%>/edit" method="post">
   <label for="name">trail name:</label>
@@ -23,8 +34,11 @@
   <label for="state">which state is this trail in? (2 letter code or whole state name):</label>
   <input type="text" name="state" id="state">
   <br>
-  <input type="checkbox" name="user_id" value="<%=current_user.id%>" <%="checked" if current_user.trail_ids.include?(@trail.id)%>>I have hiked this trail
   <br>
   <input type="submit" value="edit trail">
+</form>
+<p>delete this trail forever</p>
+<form class="delete_trail" action="/trails/<%=@trail.slug%>/destroy" method="post">
+  <input type="submit" value="delete trail">
 </form>
 <% end %>
