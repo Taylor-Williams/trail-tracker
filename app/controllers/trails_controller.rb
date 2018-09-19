@@ -13,6 +13,16 @@ class TrailsController < ApplicationController
         @trail.send("#{attribute}=", params[attribute])
       end
     end
+    if !params[:state].empty?
+        if params[:state].length == 2
+          state = State.where('lower(code) = ?', params[:state].downcase).first
+        else
+          state = State.where('lower(name) = ?', params[:state].downcase).first
+        end
+        if state
+          @trail.state = state
+        end
+    end
     @trail.save
     if !@trail.valid?
       @errors = @trail.errors.messages
@@ -45,6 +55,16 @@ class TrailsController < ApplicationController
       if !params[attribute].empty?
         @trail.send("#{attribute}=", params[attribute])
       end
+    end
+    if !params[:state].empty?
+        if params[:state].length == 2
+          state = State.where('lower(code) = ?', params[:state].downcase).first
+        else
+          state = State.where('lower(name) = ?', params[:state].downcase).first
+        end
+        if state
+          @trail.state = state
+        end
     end
     @trail.save
     if !@trail.valid?

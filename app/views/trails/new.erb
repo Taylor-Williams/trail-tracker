@@ -10,10 +10,13 @@
   <input type="text" name="start_alt" id="start_alt">
   <label for="end_alt">ending altitude in feet:</label>
   <input type="text" name="end_alt" id="end_alt">
+  <br>
   <label for="state">which state is this trail in? (2 letter code or whole state name):</label>
   <input type="text" name="state" id="state">
+  <br>
   <% if logged_in? %>
     <input type="checkbox" name="user_id" value="<%=current_user.id%>" checked>I have hiked this trail
   <% end %>
+  <br>
   <input type="submit" value="create trail">
 </form>
