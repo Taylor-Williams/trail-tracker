@@ -40,8 +40,9 @@ class ApplicationController < Sinatra::Base
     @user = User.create(username: params[:username], password: params[:password], email: params[:email], bio: params[:bio])
     if !@user.valid?
       flash[:error] = @user.errors.messages.map do |k,v|
-        "there was an issue with your #{k}:\n#{v.join(", ")}"
-      end.join("\n")
+        "<p>there was an issue with your #{k}: #{v.join(", ")}</p>"
+      end.join
+      redirect '/signup'
     else
       session[:user_id] = @user.id
       redirect "/users/#{@user.slug}"

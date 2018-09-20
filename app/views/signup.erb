@@ -11,3 +11,6 @@
   <textarea name="bio" id="bio" rows="5" cols="50" maxlength="250"></textarea>
   <input type="submit" value="create account">
 </form>
+<% if flash.has?(:error) %>
+  <%= flash[:error] %>
+<% end %>
