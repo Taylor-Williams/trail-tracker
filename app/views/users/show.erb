@@ -8,6 +8,15 @@
     <input type="submit" value="edit bio">
   </form>
   <br>
+  <% if !@trails.empty? %>
+    <p>you have created the following trails, click the link to edit or delete that trail:</p>
+    <% @trails.each do |trail| %>
+      <p><a href="/trails/<%=trail.slug%>"><%=trail.name%></a></p>
+    <% end %>
+  <% else %>
+    <p>you have not yet made any trails. would you like to <a href="/trails/new">make one</a>?</p>
+  <% end %>
+  <br>
 <% else %>
   <% if @user.bio %>
     <p>here is <%=@user.username%>'s bio:</p>
