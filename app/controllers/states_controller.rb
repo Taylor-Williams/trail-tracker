@@ -1,7 +1,7 @@
 class StatesController < ApplicationController
 
   get '/states' do
-    @states = State.all
+    @states = Trail.select(:state_id).where('state_id != ?', "").distinct.map{|s| State.find(s.state_id)}
     erb :'states/index'
   end
 
