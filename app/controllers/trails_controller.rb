@@ -83,16 +83,17 @@ class TrailsController < ApplicationController
     end
     @trail.save
     if !@trail.valid?
-      @errors = @trail.errors.messages
-      erb :errors
+      flash[:error] = @trail.errors.messages.map do |k,v|
+        "<p>there was an issue with your #{k}: #{v.join(", ")}</p>"
+      end.join
     else
       if params[:user_id] && !@trail.user_ids.include?(:user_id)
         @trail.user_trails.create(user_id: params[:user_id])
       elsif !params[:user_id] && @trail.user_ids.include?(current_user.id)
         UserTrail.find_by(trail_id: @trail.id, user_id: current_user.id).destroy
       end
-      redirect "/trails/#{@trail.slug}"
     end
+    redirect "/trails/#{@trail.slug}"
   end
 
   post '/trails/:slug/destroy' do

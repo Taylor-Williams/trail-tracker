@@ -45,3 +45,6 @@
   <input type="submit" value="delete trail">
 </form>
 <% end %>
+<% if flash.has?(:error) %>
+  <%= flash[:error] %>
+<% end %>
