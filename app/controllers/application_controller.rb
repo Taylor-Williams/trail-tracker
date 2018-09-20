@@ -43,6 +43,7 @@ class ApplicationController < Sinatra::Base
         "there was an issue with your #{k}:\n#{v.join(", ")}"
       end.join("\n")
     else
+      session[:user_id] = @user.id
       redirect "/users/#{@user.slug}"
     end
   end
