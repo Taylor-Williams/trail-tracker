@@ -11,7 +11,7 @@
         <a href="/states">All States</a>
         <% if logged_in?%>
           <a href="/users/<%=current_user.slug%>">your profile</a>
-          <p><a href="/logout">logout</a></p>
+          <a href="/logout">logout</a>
         <% else %>
           <a href="/login">log in</a>
           <a href="/signup">sign up</a>
