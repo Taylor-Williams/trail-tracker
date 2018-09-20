@@ -20,3 +20,6 @@
   <br>
   <input type="submit" value="create trail">
 </form>
+<% if flash.has?(:error) %>
+  <%= flash[:error] %>
+<% end %>

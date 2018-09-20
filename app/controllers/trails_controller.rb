@@ -30,8 +30,10 @@ class TrailsController < ApplicationController
     @trail.creator_id = current_user.id
     @trail.save
     if !@trail.valid?
-      @errors = @trail.errors.messages
-      erb :errors
+      flash[:error] = @trail.errors.messages.map do |k,v|
+        "<p>there was an issue with your #{k}: #{v.join(", ")}</p>"
+      end.join
+      redirect '/trails/new'
     else
       if params[:user_id]
         @trail.user_trails.create(user_id: params[:user_id])
