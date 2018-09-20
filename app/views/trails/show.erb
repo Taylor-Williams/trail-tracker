@@ -7,6 +7,9 @@
 <% if @trail.state %>
 <p>state: <a href="/states/<%=@trail.state.code%>"><%=@trail.state.name%></a></p>
 <% end %>
+<% if !@trail.users.empty? %>
+<p><%=@trail.users.length%> people have hiked this trail</p>
+<% end %>
 <br>
 <% if logged_in? %>
 <form class="hiked_trail" action="/users/<%=current_user.id%>/<%=@trail.id%>" method="post">
