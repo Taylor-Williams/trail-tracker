@@ -1,2 +1,2 @@
 # exclude db file
-*.sqlite
+db/development.sqlite
