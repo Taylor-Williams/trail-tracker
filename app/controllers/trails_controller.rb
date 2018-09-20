@@ -1,8 +1,12 @@
 class TrailsController < ApplicationController
 
   get '/trails' do
-    @trails = Trail.all
-    erb :"trails/index"
+    if logged_in?
+      @trails = Trail.all
+      erb :"trails/index"
+    else
+      redirect '/login'
+    end
   end
 
   post '/trails' do
@@ -37,15 +41,23 @@ class TrailsController < ApplicationController
   end
 
   get '/trails/new' do
-    erb :"/trails/new"
+    if logged_in?
+      erb :"/trails/new"
+    else
+      redirect "/login"
+    end
   end
 
   get '/trails/:slug' do
-    @trail = Trail.find_by(slug: params[:slug])
-    if @trail
-      erb :"trails/show"
+    if logged_in?
+      @trail = Trail.find_by(slug: params[:slug])
+      if @trail
+        erb :"trails/show"
+      else
+        redirect '/trails'
+      end
     else
-      redirect '/trails'
+      redirect "/login"
     end
   end
 

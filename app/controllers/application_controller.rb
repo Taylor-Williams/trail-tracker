@@ -28,7 +28,9 @@ class ApplicationController < Sinatra::Base
   end
 
   get '/logout' do
-    session.delete(:user_id)
+    if logged_in?
+      session.delete(:user_id)
+    end
     redirect '/'
   end
 
