@@ -8,7 +8,11 @@ class ApplicationController < Sinatra::Base
   end
 
   get '/' do
-    erb :home
+    if !logged_in?
+      erb :home
+    else
+      redirect "/users/#{current_user.slug}"
+    end
   end
 
   get '/login' do
