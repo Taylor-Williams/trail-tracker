@@ -1,4 +1,5 @@
 require './config/environment'
+require 'rack-flash'
 class ApplicationController < Sinatra::Base
   register Sinatra::ActiveRecordExtension
   configure do
@@ -6,6 +7,7 @@ class ApplicationController < Sinatra::Base
     enable :sessions
     set :session_secret, "password_security_is_important"
   end
+  use Rack::Flash
 
   get '/' do
     if !logged_in?
@@ -37,9 +39,11 @@ class ApplicationController < Sinatra::Base
   post '/signup' do
     @user = User.create(username: params[:username], password: params[:password], email: params[:email], bio: params[:bio])
     if !@user.valid?
-      @errors = @user.errors.messages
-      erb :errors
+      flash[:error] = @user.errors.messages.map do |k,v|
+        "there was an issue with your #{k}:\n#{v.join(", ")}"
+      end.join("\n")
     else
+      session[:user_id] = @user.id
       redirect "/users/#{@user.slug}"
     end
   end
