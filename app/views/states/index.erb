@@ -1,5 +1,4 @@
-<h3>clicking any state will give you the trails registered in that state from our database</h3>
-<h3>only states that have been given trails are shown:</h3>
+<h3>clicking any state will list the trails registered in that state from our database, only states with trails given are shown:</h3>
 <% @states.each do |state| %>
   <p><a href="/states/<%=state.code%>"><%=state.name%></a></p>
 <% end %>
