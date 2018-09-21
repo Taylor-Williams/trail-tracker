@@ -1,5 +1,5 @@
 # Trail-Tracker
-basic Sinatra CRUD application to track the trails you have hiked
+basic Sinatra Create, Read, Update, Destroy application to track the trails you have hiked
 # Installation
 to get started with Trail Tracker clone the github repository, run bundle install, and run the database migrations
 ```ruby
