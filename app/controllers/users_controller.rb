@@ -16,7 +16,9 @@ class UsersController < ApplicationController
 
   post '/users/:slug/edit' do
     @user = User.find_by(slug: params[:slug])
-    @user.update(bio: params[:bio])
+    if current_user.id == @user.id
+      @user.update(bio: params[:bio])
+    end
     redirect "/users/#{@user.slug}"
   end
 
