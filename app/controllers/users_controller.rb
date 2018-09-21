@@ -1,12 +1,16 @@
 class UsersController < ApplicationController
 
   get '/users/:slug' do
-    @user = User.find_by(slug: params[:slug])
-    @trails = Trail.where("creator_id = ?", @user.id)
-    if @user
-      erb :"users/show"
+    if logged_in?
+      @user = User.find_by(slug: params[:slug])
+      @trails = Trail.where("creator_id = ?", @user.id)
+      if @user
+        erb :"users/show"
+      else
+        redirect '/'
+      end
     else
-      redirect '/'
+      redirect '/login'
     end
   end
 
