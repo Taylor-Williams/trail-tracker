@@ -22,7 +22,7 @@ afterwards run
 
 and the Trail Tracker is at your disposal.
 # Contributing
-Bug reports and pull requests are welcome on GitHub at https://github.com/'Taylor-Williams'/PGA_Tour_Reader. This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the [Contributor Covenant](http://contributor-covenant.org) code of conduct.
+Bug reports and pull requests are welcome on GitHub at https://github.com/Taylor-Williams/trail-tracker. This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the [Contributor Covenant](http://contributor-covenant.org) code of conduct.
 # License
 The app is available as open source under the terms of the [MIT License](https://opensource.org/licenses/MIT).
 # Code of conduct
