@@ -7,7 +7,6 @@ class User < ActiveRecord::Base
   validates :email, presence: true, uniqueness: true
   has_secure_password
 
-
   before_save do
     self.slug = self.username.gsub(/[^a-zA-Z0-9]+/, "-").downcase
     self.slug.slice!(-1) if self.slug =~ /-\z/
