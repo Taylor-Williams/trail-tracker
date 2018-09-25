@@ -3,7 +3,7 @@ class Trail < ActiveRecord::Base
   has_many :user_trails
   has_many :users, through: :user_trails
 
-  mattr_accessor :display_attributes
+  mattr_reader :display_attributes
 
   validates :name, presence: true, uniqueness: true
   validates :length, numericality: true, allow_nil: true
