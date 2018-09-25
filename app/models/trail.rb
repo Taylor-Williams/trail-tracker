@@ -28,11 +28,7 @@ class Trail < ActiveRecord::Base
     make_self_display() unless @display_self
     if options
       @display_self.map do |k, v|
-        if options.keys.include?(k)
-          v + " " + options[k]
-        else
-          v
-        end
+        options.keys.include?(k) ? v + " " + options[k] : v
       end
     else
       @display_self.values.flatten
@@ -46,6 +42,8 @@ class Trail < ActiveRecord::Base
         @display_self[attribute.to_sym] = "#{attribute}: #{self.send(attribute)}"
       end
     end
-    @display_self[:state] = @display_self[:state].slice(/(.+: )/) << "<a href=\"\/states\/#{self.state.code}\">#{self.state.name}</a>"
+    if self.state
+      @display_self[:state] = @display_self[:state].slice(/(.+: )/) << "<a href=\"\/states\/#{self.state.code}\">#{self.state.name}</a>"
+    end
   end
 end
