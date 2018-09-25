@@ -22,7 +22,7 @@ class Trail < ActiveRecord::Base
     self.slug.slice!(-1) if self.slug =~ /-\z/
   end
 
-  self.display_attributes= %w(name length difficulty start_alt end_alt)
+  self.display_attributes= %w(name length difficulty start_alt end_alt state)
 
   def display_self(**options)
     make_self_display() unless @display_self
@@ -46,5 +46,6 @@ class Trail < ActiveRecord::Base
         @display_self[attribute.to_sym] = "#{attribute}: #{self.send(attribute)}"
       end
     end
+    @display_self[:state] = @display_self[:state].slice!(/:.+/) << "<a href=\"\/states\/#{self.state.code}\">#{self.state.name}</a>"
   end
 end
