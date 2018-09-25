@@ -18,6 +18,5 @@ class Trail < ActiveRecord::Base
   before_save do
     self.slug = self.name.gsub(/[^a-zA-Z0-9]+/, "-").downcase
     self.slug.slice!(-1) if self.slug =~ /-\z/
-    #validates :slug, presence: true, uniqueness: true
   end
 end
