@@ -1,9 +1,6 @@
 <% @trail.display_self(length: "mi", start_alt: "ft", end_alt: "ft").each do |attribute| %>
   <p><%=attribute%></p>
 <% end %>
-<% if @trail.state %>
-<p>state: <a href="/states/<%=@trail.state.code%>"><%=@trail.state.name%></a></p>
-<% end %>
 <% if !@trail.users.empty? %>
 <p><%=@trail.users.length%> people have hiked this trail</p>
 <% end %>

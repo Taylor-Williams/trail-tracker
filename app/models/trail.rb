@@ -46,6 +46,6 @@ class Trail < ActiveRecord::Base
         @display_self[attribute.to_sym] = "#{attribute}: #{self.send(attribute)}"
       end
     end
-    @display_self[:state] = @display_self[:state].slice!(/:.+/) << "<a href=\"\/states\/#{self.state.code}\">#{self.state.name}</a>"
+    @display_self[:state] = @display_self[:state].slice(/(.+: )/) << "<a href=\"\/states\/#{self.state.code}\">#{self.state.name}</a>"
   end
 end
