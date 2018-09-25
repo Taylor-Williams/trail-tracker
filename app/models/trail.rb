@@ -25,7 +25,7 @@ class Trail < ActiveRecord::Base
   self.display_attributes= %w(name length difficulty start_alt end_alt)
 
   def display_self(**options)
-    make_self_display(options) unless @display_self
+    make_self_display() unless @display_self
     if options
       @display_self.map do |k, v|
         if options.keys.include?(k)
@@ -39,7 +39,7 @@ class Trail < ActiveRecord::Base
     end
   end
 
-  def make_self_display(**options)
+  def make_self_display()
     @display_self = {}
     self.class.display_attributes.map do |attribute|
       if self.send(attribute)
