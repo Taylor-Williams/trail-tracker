@@ -3,7 +3,7 @@ class Trail < ActiveRecord::Base
   has_many :user_trails
   has_many :users, through: :user_trails
 
-  mattr_reader :display_attributes
+  mattr_accessor :display_attributes
 
   validates :name, presence: true, uniqueness: true
   validates :length, numericality: true, allow_nil: true
@@ -24,18 +24,26 @@ class Trail < ActiveRecord::Base
 
   self.display_attributes= %w(name length difficulty start_alt end_alt)
 
-  def display_self
-    if !@display_self
-      make_self_display
+  def display_self(**options)
+    make_self_display(options) unless @display_self
+    if options
+      @display_self.map do |k, v|
+        if options.keys.include?(k)
+          v + " " + options[k]
+        else
+          v
+        end
+      end
+    else
+      @display_self.values.flatten
     end
-    @display_self
   end
 
-  def make_self_display
+  def make_self_display(**options)
     @display_self = {}
-    self.class.display_attributes.each do |attribute|
+    self.class.display_attributes.map do |attribute|
       if self.send(attribute)
-        @display_self[attribute.to_sym] = self.send(attribute)
+        @display_self[attribute.to_sym] = "#{attribute}: #{self.send(attribute)}"
       end
     end
   end
